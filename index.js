@@ -7,7 +7,7 @@ let Jimp = require('jimp');
 
 const leds = require("rpi-ws2801");
 
-const ledsNumber = 50;
+const ledsNumber = 10;
 
 let imagePixels = [];
 
@@ -82,48 +82,56 @@ app.listen(port, () => {
 })
 
 
-function displayImage() {
+// function displayImage() {
     
-    if(displayingFrame >= framesTotal-1){
-        displayingFrame = 0;
-    } else {
-        displayingFrame++;
-    }
-    console.log('displaying', displayingFrame);
-    console.log(typeof imagePixels[displayingFrame]);
-    if(imagePixels[displayingFrame] !== undefined){
-        for( let i = 0; i < imagePixels[displayingFrame].length && i < ledsNumber ; i++){
-            leds.setRGB(i, '#'+imagePixels[displayingFrame][i]);
-        }
-        leds.update();
-        console.log('Leds updated');
-    } 
-}
+//     if(displayingFrame >= framesTotal-1){
+//         displayingFrame = 0;
+//     } else {
+//         displayingFrame++;
+//     }
+//     console.log('displaying', displayingFrame);
+//     console.log(typeof imagePixels[displayingFrame]);
+//     if(imagePixels[displayingFrame] !== undefined){
+//         for( let i = 0; i < imagePixels[displayingFrame].length && i < ledsNumber ; i++){
+//             leds.setRGB(i, '#'+imagePixels[displayingFrame][i]);
+//         }
+//         leds.update();
+//         console.log('Leds updated');
+//     } 
+// }
 
 
-function prepareSending(imageName){
-    leds.disconnect();
-    leds.connect(ledsNumber,'/dev/spidev1.0');
-    Jimp.read('./static/'+imageName, (err, image) => {
-        if (err) throw err;
-        let height = image.getHeight();
-        let width = image.getWidth();
-        for(let i =0; i < height; i++){
-            for(let j =0; j < width; j++){
-                if(imagePixels[i] == undefined){
-                    imagePixels[i] = [];
-                }
-                imagePixels[i][j] = image.getPixelColour(i,j);
-            }   
-        }
-        if(imagesTimer){
-            clearInterval(imagesTimer);
-        }
-        framesTotal = width;
-        displayingFrame = 0;
-        imagesTimer = setInterval(function(){ displayImage();}, 1000);
-    });
-}
+// function prepareSending(imageName){
+//     leds.disconnect();
+//     leds.connect(ledsNumber,'/dev/spidev1.0');
+//     Jimp.read('./static/'+imageName, (err, image) => {
+//         if (err) throw err;
+//         let height = image.getHeight();
+//         let width = image.getWidth();
+//         for(let i =0; i < height; i++){
+//             for(let j =0; j < width; j++){
+//                 if(imagePixels[i] == undefined){
+//                     imagePixels[i] = [];
+//                 }
+//                 imagePixels[i][j] = image.getPixelColour(i,j);
+//             }   
+//         }
+//         if(imagesTimer){
+//             clearInterval(imagesTimer);
+//         }
+//         framesTotal = width;
+//         displayingFrame = 0;
+//         imagesTimer = setInterval(function(){ displayImage();}, 1000);
+//     });
+// }
 //refreshImages
 
-prepareSending(imageFile); 
+//prepareSending(imageFile); 
+
+leds.connect(ledsNumber,'/dev/spidev1.0');
+imagesTimer = setInterval(function(){ 
+    leds.fill(0xFF, 255, 0x00);
+    leds.update();
+
+
+}, 1000);
