@@ -103,7 +103,7 @@ function displayImage() {
 
 function prepareSending(imageName){
     leds.disconnect();
-    leds.connect(ledsNumber);
+    leds.connect(ledsNumber,'/dev/spidev1.0');
     Jimp.read('./static/'+imageName, (err, image) => {
         if (err) throw err;
         let height = image.getHeight();
