@@ -1,0 +1,27 @@
+{
+  "name": "ny-tree-lights",
+  "version": "1",
+  "private": true,
+  "description": "NY tree lights tool to run WS2801 via SPI on Beaglebone board",
+  "author": "Ivan Davletshin",
+  "repository": "https://github.com/RoyalAholdDelhaize/ah-ctp-probot-github-settings.git",
+  "homepage": "https://github.com/RoyalAholdDelhaize/ah-ctp-probot-github-settings",
+  "bugs": "https://github.com/RoyalAholdDelhaize/ah-ctp-probot-github-settings/issues",
+  "keywords": [
+    "probot",
+    "github",
+    "probot-app"
+  ],
+  "scripts": {
+    "serve": "node index.js"
+  },
+  "dependencies": {
+    "beaglebone-io": "^4.1.0",
+    "body-parser": "^1.19.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-fileupload": "^1.2.1",
+    "jimp": "^0.16.1",
+    "rpi-ws2801": "0.0.4"
+  }
+}
