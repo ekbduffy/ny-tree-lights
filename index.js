@@ -128,7 +128,7 @@ app.listen(port, () => {
 
 //prepareSending(imageFile); 
 
-leds.connect(ledsNumber,'/dev/spidev1.0');
+leds.connect(ledsNumber);
 imagesTimer = setInterval(function(){ 
     leds.fill(0xFF, 255, 0x00);
     leds.update();
