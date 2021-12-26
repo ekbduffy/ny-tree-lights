@@ -1,6 +1,6 @@
 {
   "name": "ny-tree-lights",
-  "version": "1",
+  "version": "0.0.1",
   "private": true,
   "description": "NY tree lights tool to run WS2801 via SPI on Beaglebone board",
   "author": "Ivan Davletshin",
