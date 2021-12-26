@@ -81,8 +81,6 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
 
-// leds.connect(ledsNumber);
-
 
 function displayImage() {
     
@@ -94,15 +92,18 @@ function displayImage() {
     console.log('displaying', displayingFrame);
     console.log(typeof imagePixels[displayingFrame]);
     if(imagePixels[displayingFrame] !== undefined){
-        for( let i = 0; i < imagePixels[displayingFrame].length; i++){
-           console.log(imagePixels[displayingFrame][i]);
+        for( let i = 0; i < imagePixels[displayingFrame].length && i < ledsNumber ; i++){
+            leds.setRGB(i, '#'+imagePixels[displayingFrame][i]);
         }
-//    leds.update();
+        leds.update();
+        console.log('Leds updated');
     } 
 }
 
 
 function prepareSending(imageName){
+    leds.disconnect();
+    leds.connect(ledsNumber);
     Jimp.read('./static/'+imageName, (err, image) => {
         if (err) throw err;
         let height = image.getHeight();
